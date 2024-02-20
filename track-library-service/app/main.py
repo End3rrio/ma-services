@@ -6,7 +6,7 @@ import asyncio
 from fastapi import FastAPI
 
 
-from app import rabbitmq
+
 from app.settings import settings
 
 from app.endpoints.track_router import track_catalog_router
