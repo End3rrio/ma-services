@@ -80,7 +80,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build . -f ./book-service/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/book-service:latest
+          docker build . -f ./track-library-service/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/track-library-service:latest
 
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
@@ -91,7 +91,7 @@ jobs:
 
       - name: Push tag YC Registry
         run: |
-          docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/book-service:latest
+          docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/track-library-service:latest
 
 
   deploy:
@@ -105,7 +105,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_KEYS }}
           container-name: ${{ secrets.YC_CONTAINER_NAME }}
           folder-id: ${{ secrets.YC_FOLDER_ID }}
-          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/book-service:latest
+          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/track-library-service:latest
           revision-service-account-id: ${{ secrets.YC_SA_ID }}
           revision-env: |
             AMQP_URL=${{ secrets.ENV_AMQP_URL }}
