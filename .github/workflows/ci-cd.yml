@@ -108,5 +108,5 @@ jobs:
           revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/track-library-service:latest
           revision-service-account-id: ${{ secrets.YC_SA_ID }}
           revision-env: |
-            AMQP_URL=${{ secrets.ENV_AMQP_URL }}
-            POSTGRES_URL=${{ secrets.ENV_POSTGRES_URL }}
+            AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/
+            POSTGRES_URL=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/track-service
