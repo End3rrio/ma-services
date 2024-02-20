@@ -5,7 +5,7 @@
 import asyncio
 from fastapi import FastAPI
 
-from app import rabbitmq
+
 from app.settings import settings
 
 from app.endpoints.recommendation_router import recommendation_router

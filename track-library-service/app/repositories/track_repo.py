@@ -5,7 +5,7 @@ from app.models.track import Track
 
 class TrackRepo:
     tracks = [
-        Track(id=uuid4(), title='TrackTitle', author='Author Name', genre='Fiction',
+        Track(id=uuid4(), name='TrackTitle', author='Author Name', genre='Fiction',
               publisher='Publisher Name', description='TrackDescription')
     ]
 
