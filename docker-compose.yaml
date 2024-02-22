@@ -25,7 +25,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./track-library-service/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -41,7 +41,7 @@ services:
   promtail:
     image: grafana/promtail:latest
     volumes:
-      - ./config/promtail.yaml:/etc/promtail/docker-config.yaml
+      - ./track-library-service/config/promtail.yml:/etc/promtail/docker-config.yaml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: -config.file=/etc/promtail/docker-config.yaml
