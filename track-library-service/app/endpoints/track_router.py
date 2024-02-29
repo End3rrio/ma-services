@@ -3,6 +3,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Body
 
 from app.models.track import Track, CreateTrackRequest
+from app.rabbitmq import send_recommendation
 from app.services.music_catalog_service import TrackCatalogService
 
 track_catalog_router = APIRouter(prefix='/track-catalog', tags=['TrackCatalog'])
@@ -31,13 +32,18 @@ def get_track(track_id: UUID, track_catalog_service: TrackCatalogService = Depen
 
 
 @track_catalog_router.post('/add')
-def add_track(request: CreateTrackRequest,
-              track_catalog_service: TrackCatalogService = Depends(TrackCatalogService)) -> Track:
+async def add_track(request: CreateTrackRequest,
+                    track_catalog_service: TrackCatalogService = Depends(TrackCatalogService)) -> Track:
     new_track = track_catalog_service.add_track(
         name=request.name,
         author=request.author,
         genre=request.genre,
         description=request.description)
+
+    user_id = uuid.uuid4()
+
+    await send_recommendation(user_id, new_track.id)
+
     return new_track.dict()
 
 
